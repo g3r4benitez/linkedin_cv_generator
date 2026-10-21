@@ -1,0 +1,73 @@
+{
+  "name": "Gerardo Benitez",
+  "contact_info": {
+    "phone": "+541123990625",
+    "email": "gerardobenitez@gmail.com"
+  },
+  "headline": "AI Engineer | Full Stack Developer | Python | FastAPI | RAG | Langchain | Javascript | NodeJs | ReacJs | AWS | Docker",
+  "summary": "Backend Developer 9+ years building scalable distributed systems",
+  "skills": [
+    "RabbitMQ",
+    "Celery",
+    "Kafka",
+    "Apache Airflow",
+    "Tornado",
+    "Mysql",
+    "Jquery",
+    "Flash",
+    "serverless",
+    "Athena",
+    "Bitrix24",
+    "PayPal",
+    "Twilio",
+    "Google APIs",
+    "AWS",
+    "Docker",
+    "Git",
+    "CI/CD",
+    "Lambda",
+    "PostgreSQL"
+  ],
+  "experience": [
+    {
+      "company": "FORWARD Platform",
+      "title": "Back End Developer",
+      "dates": "May 2022 - Present (4 years 6 months)",
+      "description": "I freed the CTO from 1 hour of manual work per day, avoiding errors and To decouple and centralize the communication as a service I created an API Developed and maintained microservices using Node.js (NestJS) and Python Integrated third-party APIs such as PayPal, Twilio, Google APIs, and AWS. Implemented unit testing and process automation with CI/CD. Managed AWS infrastructure with serverless solutions. Payment ecosystem with Paypal, Bank integration, MoneyGram, Western System to replace a manual process executed by the CTO. freeing it up in 20 Decouple and centralize communication, creating APIs to send Sms, Emails, Developed and maintained microservices using Python and Javascript. Manage AWS infrastructure with serverless solutions, API integrations: ools: AI + SDD (Spec Driven Develepment), Python, FastAPI, Django, Flask,"
+    },
+    {
+      "company": "ComprandoEnGrupo.net",
+      "title": "Back End Developer",
+      "dates": "January 2021 - May 2022 (1 year 5 months)",
+      "description": ""
+    },
+    {
+      "company": "Comprando En Grupo",
+      "title": "Back End Developer",
+      "dates": "June 2019 - January 2021 (1 year 8 months)",
+      "description": "Create an API to Improve the integration between internal system with Implement message queues with rabbitMQ to decouple logic and reduce ools: Python, FastAPI, Django, Flask, PostgreSQL, AWS, RabbitMQ, Celery,"
+    },
+    {
+      "company": "Greater Buenos Aires",
+      "title": "Back End Developer",
+      "dates": "May 2017 - June 2019 (2 years 2 months)",
+      "description": "Objetive: reduce 20% of operations cost Developed transaction and financial data processing systems. Integrated multiple APIs for banking operations management. Automated deal filtering system, export/import data to csv, compare Developed transaction and financial data processing systems using Python ools: Python, Tornado web framework, Athena, PostgreSQL"
+    },
+    {
+      "company": "KIU System Solutions",
+      "title": "Full Stack Developer & Technical Leader",
+      "dates": "August 2003 - May 2017 (13 years 10 months)",
+      "description": "Software Engineer, 2 years as Technical Lead from 2015 to 2017, my team ools: Python, Php, Mysql, Linux, Jquery, Asp, Flash, Action Script."
+    }
+  ],
+  "education": [
+    {
+      "institution": "Universidad Nacional de La Matanza",
+      "degree": "4to Año - Ingenieria en informática · (2015 - 2018)",
+      "dates": ""
+    }
+  ],
+  "languages": [
+    "Spanish"
+  ]
+}
