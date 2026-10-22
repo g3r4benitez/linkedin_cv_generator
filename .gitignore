@@ -1,0 +1,23 @@
+# Environment variables (nunca versionar credenciales)
+.env
+.env.local
+
+# Generated CVs and output files
+cvs_generados/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Virtual environments
+venv/
+.venv/
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db

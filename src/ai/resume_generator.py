@@ -85,11 +85,11 @@ class ResumeGenerator:
         .job-title {
             font-weight: bold;
             color: #2C3E50;
-            font-size: 12px;
+            font-size: 14px;
         }
         .job-dates {
             color: #7F8C8D;
-            font-size: 10px;
+            font-size: 12px;
         }
         .skills-grid {
             display: grid;
@@ -98,9 +98,7 @@ class ResumeGenerator:
             margin-top: 5px;
         }
         .skill-item {
-            background-color: #E8F0F7;
-            padding: 3px 8px;
-            border-radius: 3px;
+            padding: 3px 3px;
             font-size: 10px;
         }
         .achievement {
@@ -146,7 +144,7 @@ class ResumeGenerator:
     <!-- Skills -->
     <div class="section">
         <h3>{{ labels.skills }}</h3>
-        <div class="skills-grid">
+        <div >
             {% for skill in skills %}
             <span class="skill-item">{{ skill }}</span>
             {% endfor %}
@@ -158,11 +156,13 @@ class ResumeGenerator:
         <h3>{{ labels.experience }}</h3>
         {% for job in experience %}
         <div class="job-item">
-            <div class="job-title">{{ job.title }} at {{ job.company }}</div>
-            <div class="job-dates">{{ job.dates }}</div>
+            <div class="job-title">{{ job.title }} at {{ job.company }} | <span class="job-dates">{{ job.dates }}</span></div>
             {% if job.description %}
             <p style="font-size:13px; margin-top:5px;">{{ job.description if job.description is string else job.description }}</p>
             {% endif %}
+    <!-- Skills -->
+    <div class="section">
+        <h3>{{ labels.skills }}</h3>
         </div>
         {% endfor %}
     </div>
@@ -192,8 +192,11 @@ class ResumeGenerator:
     </div>
     {% endif %}
 
+    <!-- Skills -->
+    <div class="section">
+        <h3>{{ labels.skills }}</h3>
     <!-- GitHub Highlights -->
-    {% if github_highlights %}
+    {% if github_highlights.featured_projects %}
     <div class="section">
         <h3>{{ labels.github }}</h3>
         {% for project in github_highlights.featured_projects %}
@@ -254,7 +257,10 @@ class ResumeGenerator:
         try:
             # Si hay job description, optimizar contenido con IA
             if job_description and use_ai and self.job_analyzer:
-                job_data = self.job_analyzer.analyze_job_description(job_description, language)
+                job_data = self.job_analyzer.analyze_job_descrip
+    <!-- Skills -->
+    <div class="section">
+        <h3>{{ labels.skills }}</h3>tion(job_description, language)
                 job_data = self.job_analyzer._normalize_job_data(job_data)
                 optimized = self.job_analyzer.optimize_resume_content(profile_data, job_data, language)
 
@@ -337,7 +343,7 @@ class ResumeGenerator:
                 filename = f"cv_generado_{timestamp}.txt"
             else:
                 filename = f"cv_generado_{timestamp}.html"
-
+)
         # Guardar en carpeta cvs_generados
         output_dir = os.path.join(os.path.dirname(__file__), "..", "..", "cvs_generados")
         os.makedirs(output_dir, exist_ok=True)

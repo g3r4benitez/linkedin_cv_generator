@@ -182,7 +182,8 @@ def github_integration():
     
     username = st.text_input(
         "Username de GitHub",
-        placeholder="gerardobenitez"
+        placeholder="g3r4benitez",
+        help="Tu nombre de usuario de GitHub para extraer información de tu perfil y proyectos"
     )
     
     if github_token and username:
@@ -246,7 +247,7 @@ def generate_resume_page():
     # Integrar highlights de GitHub si existen
     if st.session_state.github_highlights:
         profile_data["github_highlights"] = st.session_state.github_highlights
-        profile_data["github_username"] = "gerardobenitez"
+        profile_data["github_username"] = "g3r4benitez"  # Puedes hacer que esto sea dinámico si lo deseas
     
     # Input de job description
     st.subheader("📄 Job Description")

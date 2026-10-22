@@ -42,6 +42,7 @@ class LinkedInPDFParser:
 
         # Extraer nombre, headline y contacto (primeras líneas)
         self._parse_contact_section(lines, data)
+        self.data = data  # Necesario para que _parse_skills_section acceda al headline
 
         # Extraer habilidades
         data["skills"] = self._parse_skills_section(lines)
@@ -112,6 +113,15 @@ class LinkedInPDFParser:
         # Unir y limpiar el headline
         if headline_parts:
             full_headline = " | ".join(headline_parts).strip(" |")
+            # Correcciones de OCR comunes
+            ocr_corrections = {
+                "RsAG": "RAG",
+                "Docuker": "Docker",
+                "ReacJs": "ReactJs",
+            }
+            for wrong, correct in ocr_corrections.items():
+                full_headline = full_headline.replace(wrong, correct)
+
             tech_items = []
             for item in full_headline.split("|"):
                 item = item.strip()
@@ -146,13 +156,25 @@ class LinkedInPDFParser:
             "pytest", "unit", "testing", "agile", "scrum", "sass",
             "langchain", "rag", "ai", "machine", "ml", "gcp", "azure",
             "asp", "flash", "actionscript", "serverless", "athena",
-            "nestjs", "nestjs", "nestjs", "nodejs",
+            "nestjs", "nodejs", "reactjs",
             # Keywords adicionales
             "html", "css", "sass", "saas", "nextjs", "express", "sequelize",
             "typeorm", "prisma", "supabase", "firebase", "auth0", "okta",
         ]
 
-        # 1. PARSEAR SECCIÓN "Top Skills" PRIMERO (prioridad máxima)
+        # 1. Extraer habilidades del headline (prioridad alta)
+        if self.data.get("headline"):
+            headline_skills = [s.strip() for s in self.data["headline"].split("|") if s.strip()]
+            for skill in headline_skills:
+                # Solo extraer partes individuales que coincidan con tech keywords
+                # (evita agregar títulos como "AI Engineer" como habilidad)
+                for part in skill.split():
+                    part_clean = part.strip().rstrip(",.")
+                    if part_clean and part_clean.lower() in [t.lower() for t in tech_keywords]:
+                        if part_clean.lower() not in [s.lower() for s in skills]:
+                            skills.append(part_clean)
+
+        # 2. PARSEAR SECCIÓN "Top Skills" (prioridad alta)
         in_skills_section = False
         for i, line in enumerate(lines):
             if "Top Skills" in line:
@@ -176,44 +198,41 @@ class LinkedInPDFParser:
                     break
 
                 # Extraer habilidades: líneas cortas y técnicas
-                if stripped and len(stripped) < 40 and len(stripped) > 1:
-                    # Filtrar texto descriptivo no técnico
-                    desc_filter = [
-                        "architectures", "principles", "operations", "requirements",
-                        "development", "systems", "design", "testing", "documentation",
-                        "layers", "integration", "processes", "solutions", "communication",
-                        "serverless", "queues", "teams", "delivery",
-                        "efficiency", "engagement", "accessibility", "information",
-                        "handling", "deployment", "capability", "architecture",
-                        "years", "worked", "knowledge", "managed", "implemented",
-                        "created", "developed", "sources", "forward", "platform",
-                    ]
+                if stripped and len(stripped) > 1:
+                    if len(stripped) < 40:
+                        # Filtrar texto descriptivo no técnico
+                        desc_filter = [
+                            "architectures", "principles", "operations", "requirements",
+                            "development", "systems", "design", "testing", "documentation",
+                            "layers", "integration", "processes", "solutions", "communication",
+                            "serverless", "queues", "teams", "delivery",
+                            "efficiency", "engagement", "accessibility", "information",
+                            "handling", "deployment", "capability", "architecture",
+                            "years", "worked", "knowledge", "managed", "implemented",
+                            "created", "developed", "sources", "forward", "platform",
+                        ]
 
-                    if not any(word in lower_line for word in desc_filter):
-                        # Verificar que sea algo técnico
-                        if any(tech.lower() in lower_line for tech in tech_keywords):
-                            top_skills_section.append(stripped)
+                        if not any(word in lower_line for word in desc_filter):
+                            # Verificar que sea algo técnico
+                            if any(tech.lower() in lower_line for tech in tech_keywords):
+                                # Limpiar artefactos OCR (ej: "Docker -")
+                                clean_skill = re.sub(r'\s*-$', '', stripped).strip()
+                                top_skills_section.append(clean_skill)
+                    else:
+                        # Para líneas largas: extraer skills con capitalización original
+                        for tech in tech_keywords:
+                            pattern = re.compile(r'\b' + re.escape(tech) + r'\b', re.IGNORECASE)
+                            match = pattern.search(stripped)
+                            if match:
+                                skill_text = match.group()
+                                if skill_text.lower() not in [s.lower() for s in top_skills_section]:
+                                    top_skills_section.append(skill_text)
 
         # Agregar las habilidades de la sección "Top Skills" con prioridad
         for skill in top_skills_section:
             normalized = skill.strip()
             if normalized and normalized.lower() not in [s.lower() for s in skills]:
                 skills.append(normalized)
-
-        # 2. Extraer habilidades del headline (si existe)
-        if self.data.get("headline"):
-            headline_skills = [s.strip() for s in self.data["headline"].split("|") if s.strip()]
-            for skill in headline_skills:
-                # Extraer solo el nombre técnico (eliminar prefijos no técnicos)
-                for part in skill.split():
-                    part_clean = part.strip()
-                    if part_clean and part_clean.lower() in [t.lower() for t in tech_keywords]:
-                        if part_clean not in skills and part_clean.lower() not in [s.lower() for s in skills]:
-                            skills.append(part_clean)
-                # También agregar habilidades completas del headline
-                for tech in tech_keywords:
-                    if tech.lower() in skill.lower() and skill not in skills and skill.lower() not in [s.lower() for s in skills]:
-                        skills.append(skill)
 
         # 3. Buscar patrones técnicos en el texto completo (complemento)
         full_text = '\n'.join(lines)
@@ -226,7 +245,7 @@ class LinkedInPDFParser:
             r"GitLab", r"Lambda", r"API Gateway", r"PostgreSQL", r"Redis",
             r"MongoDB", r"Vue\.js", r"Angular", r"Symfony", r"Laravel",
             r"TypeScript", r"GraphQL", r"Pytest", r"Selenium", r"Jest",
-            r"React\.js", r"Node\.js", r"NestJS", r"FastAPI", r"Django",
+            r"React\.js", r"Node\.js", r"NodeJs", r"NestJS", r"FastAPI", r"Django",
             r"Flask", r"Rest API", r"Microservices", r"Python", r"Javascript",
             r"Langchain", r"Redis", r"RabbitMQ"
         ]
@@ -394,10 +413,10 @@ class LinkedInPDFParser:
         """Extrae información educativa."""
         education = []
 
-        # Encontrar sección de educación
+        # Encontrar sección de educación (maneja errores de OCR)
         edu_start_idx = -1
         for i, line in enumerate(lines):
-            if line.strip().startswith("Education"):
+            if "ducation" in line.strip() or line.strip().startswith("Education"):
                 edu_start_idx = i
                 break
 
@@ -414,9 +433,12 @@ class LinkedInPDFParser:
             if not line or len(line) <= 1:
                 continue
             # Ignorar líneas que son solo decoración
-            if re.match(r"^[a-z]\s*[a-z]*$", line):
+            if re.match(r"^[a-z]$", line):
                 continue
-            edu_lines.append(line)
+            # Quitar prefijos de carácter único de OCR
+            clean_line = re.sub(r"^[a-z]\s+", "", line)
+            if clean_line:
+                edu_lines.append(clean_line)
 
         if edu_lines:
             # La primera línea con texto largo es la institución
@@ -435,13 +457,26 @@ class LinkedInPDFParser:
     def _parse_languages(self, lines: List[str]) -> List[str]:
         """Extrae lenguas del perfil con nivel de proficiencia."""
         languages = []
+        # Patrón: "Spanish (Native or Bilingual)" o "English (Full Professional, B2+)"
+        # Extrae solo el idioma y su nivel, ignorando texto intercalado del PDF
+        lang_pattern = re.compile(r"^([A-Za-z]+)\s*\(([^)]+)\)")
+
         for line in lines:
             stripped = line.strip()
-            # Match patterns like "Spanish (Native or Bilingual)", "English (Full Professional)"
             if "Native" in stripped or "Bilingual" in stripped or "Professional" in stripped:
-                # Devolver el texto completo (idioma + nivel)
-                languages.append(stripped)
-        return list(dict.fromkeys(languages))  # Preserve order, deduplicate
+                match = lang_pattern.match(stripped)
+                if match:
+                    lang_str = f"{match.group(1)} ({match.group(2)})"
+                    if lang_str not in languages:
+                        languages.append(lang_str)
+                else:
+                    # Fallback: extraer solo la palabra idioma
+                    lang_name_match = re.match(r"^([A-Za-z]+)", stripped)
+                    if lang_name_match and len(lang_name_match.group(1)) > 2:
+                        lang_str = lang_name_match.group(1)
+                        if lang_str not in languages:
+                            languages.append(lang_str)
+        return languages
 
     def _parse_summary_section(self, lines: List[str]) -> str:
         """Extrae el resumen profesional."""
@@ -521,7 +556,10 @@ class LinkedInPDFParser:
         }
 
 if __name__ == "__main__":
-    pdf_path = "/home/gerardo/projects/curriculum_custom/data/gerardobenittez_profile_linkedin.pdf"
+    pdf_path = "/home/gerardo/projects/curriculum_custom/data/gerardobenittez_profile_linkedin_top_skills_v2.pdf"
+
+    if not os.path.exists(pdf_path):
+        pdf_path = "/home/gerardo/projects/curriculum_custom/data/gerardobenittez_profile_linkedin_top_skills.pdf"
 
     if not os.path.exists(pdf_path):
         print(f"Error: No se encuentra el archivo PDF en {pdf_path}")

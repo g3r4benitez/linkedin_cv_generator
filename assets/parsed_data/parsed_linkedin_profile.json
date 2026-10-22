@@ -4,71 +4,71 @@
     "phone": "+541123990625",
     "email": "gerardobenitez@gmail.com"
   },
-  "headline": "AI Engineer | Full Stack Developer | Python | FastAPI | RsAG | Langchain | Javascript | NodeJs | ReacJs | AWS | Docuker",
-  "summary": "Backend Developer 9+ years building scalable distributed systems in Python and NodeJs (Javascript/Typescript), Microservices, event- Python FastAPI driven architectures, AWS serverless, Technical Lead during 2 Langchain years, I worked at JP Morgan Chaose, Currently in a US startup, Javascript / Typescript Deep knowledge of OOP, SOLIDc and software design principles.At NodeJs AWS Forward Platform, we needed to accept payments from various Docker sources (PayPal, Money, boank transfers, among others). I designed Languages a scalable, event-drivenn architecture using Apache Kafka to address this requirement; I implemented unit and integration test coverage Spanish (Native or Bilingual) r and documented the entire solution. This architecture processes English (Full Professional) 10,000 transactions daily, with peaks of 100,000 for specific events.",
+  "headline": "AI Engineer | Full Stack Developer | Python | FastAPI | RAG | Langchain | Javascript | NodeJs | ReactJs | AWS | Docker",
+  "summary": "Backend Developer 9+ years building scalable distributed systems in Python and NodeJs (Javascript/Typescript), Microservices, event- driven architectures, AWS serverless, Technical Lead during 2 Javascript / Typescript years, I worked at JP Morgan Chaose, Currently in a US startup, AWS Deep knowledge of OOP, SOLIDc and software design principles.At Docker - Forward Platform, we needed to accept payments from various sources (PayPal, Money, boank transfers, among others). I designed a scalable, event-drivenn architecture using Apache Kafka to address this requirement; I implemented unit and integration test coverage Languages and documented the entire solution. This architecture processes Spanish (Native or Bilingual) 10,000 transactions daily, with peaks of 100,000 for specific events. English (Full Professional, B2+) .",
   "skills": [
+    "AI",
     "Python",
+    "FastAPI",
+    "RAG",
     "Langchain",
-    "Javascript / Typescript",
+    "Javascript",
     "NodeJs",
+    "ReactJs",
+    "AWS",
     "Docker",
+    "Typescript",
+    "Microservices",
+    "serverless",
+    "Kafka",
+    "unit",
     "RabbitMQ",
     "Celery",
-    "Kafka",
     "Apache Airflow",
     "Tornado",
-    "Mysql",
-    "Jquery",
-    "Flash",
-    "serverless",
-    "Athena",
-    "Bitrix24",
-    "PayPal",
-    "Twilio",
-    "Google APIs",
-    "AWS"
+    "MySql"
   ],
   "experience": [
     {
       "company": "FORWARD Platform",
-      "title": "Back End Developer",
-      "dates": "May 2022 - Present (4 years 6 months)",
-      "description": "I freed the CTO from 1 hour of manual work per day, avoiding errors and t automating a key business process, It is a solution created with Apache Airflow, FastAPI, Rabbit/Celery and the Google Sheet API. M Define architecture, dockerize the solution To decouple and centralize the communication as a service I created an API i to send Sms, Emails, Whatsapp. Dockerize the solution Developed and maintained microservices using Node.js (NestJS) and Python (FastAPI, Flask, Django). Integrated third-party APIs such as PayPal, Twilio, Google APIs, and AWS. Implemented unit testing and process automation with CI/CD. Managed AWS infrastructure with serverless solutions."
-    },
-    {
-      "company": "FORWARD Platform",
       "title": "Full Stack Engineer",
       "dates": "May 2022 - Present (4 years 6 months)",
-      "description": "Payment ecosystem with Paypal, Bank integration, MoneyGram, Western Union, it is a event-driven system e System to replace a manual process executed by the CTO. freeing it up in 20 hs/month for strategic operations m Decouple and centralize communication, creating APIs to send Sms, Emails,"
+      "description": "Payment ecosystem with Paypal, Bank integration, MoneyGram, Western r Union, it is a event-driven system System to replace a manual process executed by the CTO. freeing it up in 20 hs/month for strategic operations Decouple and centralize communication, creating APIs to send Sms, Emails,"
     },
     {
-      "company": "ComprandooEnGrupo.net",
+      "company": "ComprandoEnGrupo.net",
       "title": "Back End Developer",
       "dates": "January 2021 - May 2022 (1 year 5 months)",
-      "description": "Developed and maintained micros-ervices using Python and Javascript. Manage AWS infrastructure with serverless solutions, API integrations: PayPal, Twilio, Google, andn AWS Tecnologías: AI + SDD (Spec Dr iven Develepment), Python, FastAPI, Django, Flask, AWS (Lambda, ApiGaoteway, S3), PostgreSQL, RabbitMQ, Celery, Kafka, NodeJs, NestJs, ReactJs, Apache Airflow, Docker, CI/CD, Git, SqlServer •F Improved integration between internal systems, customer acquisition website, Dand Bitrix24 CRM, streamlining customer contact processes. Dockerized solutions to enhance deployment efficiency and scalability. Implemented message queues using RabbitMQ and Celery to decouple e services and reduce active custom wait time. t Tools: Python, FastAPI, Django, Flask, PostgreSQL, AWS, RabbitMQ, Celery, AWS (Lambda, ApiGateway, S3, M EC2), Docker, CI/CD, Git"
+      "description": "Developed and maintained microservices using Python and Javascript. Manage AWS infrastructure with serverless solutions, API integrations: PayPal, Twilio, Google, and AWS d Tools: Python, FastAPI, Django, Flask, AWS (Lambda, ApiGateway, S3), e PostgreSQL, RabbitMQ, Celery, Kafka, NodeJs, NestJs, ReactJs, Apache Airflow, Docker, CI/CD, Git, SqlServer, SDD e (Spec Driven Develepment) Improved integration between internal systems, customaer acquisition website, and Bitrix24 CRM, streamlining customer contact proceisses. Dockerized solutions to enhance deployment efficirency and scalability. Implemented message queues using RabbitMQ and Celery to decouple services and reduce active custom wait time. Tecnologías: Python, FastAPI, Django, Flask, PostgreSQL, AWS, RabbitMQ, Celery, AWS (Lambda, ApiGateway, S3, o EC2), Docker, CI/CD, Git"
     },
     {
-      "company": "JPMorgan Chase & Co.",
+      "company": "JPMorgan Chase & Co. o",
       "title": "Back End Developer",
       "dates": "June 2019 - January 2021 (1 year 8 months)",
-      "description": "Objetive: reduce 20% of operations cost I led the design and implementation of an end-to-end portfolio optimization e system, developed with Python and the Tornado framework, to address r uniformly applied operating costs. The project included the creation of a secure integration layer with the core transactional system (Athena) and a robust validation module that ran financial simulations against strict risk thresholds. Thanks to its adoption, the system achieved a 20% reduction in portfolio operating costs while maintaining 100% risk compliance Developed transaction and financial data processing syastems. Integrated multiple APIs for banking operations marnagement."
+      "description": "Automated deal filtering system, export/import data to csv, compare difference, gener.ate reports, reduced operational coosts in a 30%. Developed transaction and financial data processing systems using Python. Tecnologías: Python, Tornado web framework, Athena, PostgreSQL"
     },
     {
       "company": "Grupo MSA S.A.",
       "title": "Back End Developer",
-      "dates": "May 2017 - June 2019 (2 years 2 montohs)",
-      "description": "Create web applications to manage elections systems Mantain and extend vote maochine's software Mantain and extend mobilne application to send telegram with voting information"
+      "dates": "PMay 2017 - June 2019 (2 years 2 months)",
+      "description": "Administration system created with Django and Jquery. Extend voting system using Python, PostgreSQL, and Linux Integrate 3rd Party Services and APIs with Flask and DRF. M Tools: Python, Django, Flask, Javascript, Ansible, PostgreSQL, Jquery, MySql"
+    },
+    {
+      "company": "KIU System Solutions",
+      "title": "Full Stack Developer & Technical Leader",
+      "dates": "December 2012 - May 2017 (4 years 6 months)",
+      "description": "Developed robust APIs for external clients using Django and Flask, a enhancing integration capabilities. Created dynamic websites with Django and Symphony, improving user engagement and experience. Led a full-stack team of 5, fostering collaboration and innovation in project Tecnologías: Python, Javascript, Php, Mysql, Linux, Jquery, Asp, Flash, Action Script."
     }
   ],
   "education": [
     {
-      "institution": "Universidad Nracional de La Matanza",
+      "institution": "Universidad Nacional de La Matanza",
       "degree": "4to Año - Ingenieria en informática · (2015 - 2018)",
       "dates": ""
     }
   ],
   "languages": [
-    "Spanish (Native or Bilingual) r",
-    "English (Full Professional)"
+    "Spanish (Native or Bilingual)",
+    "English (Full Professional, B2+)"
   ]
 }
