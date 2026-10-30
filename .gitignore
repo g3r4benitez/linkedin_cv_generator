@@ -9,6 +9,7 @@ cvs_generados/
 __pycache__/
 *.py[cod]
 *.egg-info/
+*.pyc
 
 # Virtual environments
 venv/
@@ -21,3 +22,6 @@ venv/
 # OS
 .DS_Store
 Thumbs.db
+
+# Data files
+assets/parsed_data/**
